@@ -11,12 +11,15 @@ import UIKit
 class HolidayDetailsViewController: UITableViewController {
     
     var holidayLists : [HolidayInfo] = []
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         holidayLists = HolidayInfoViewModel.sharedInstance.holidayLists
         
         NotificationCenter.default.addObserver(self, selector: #selector(HolidayDetailsViewController.holidayListgUpdated(_:)), name:HolidayInfoViewModel.Notification.didLoadNewHoliday.name, object: nil)
+
 
 
     }
@@ -70,3 +73,4 @@ class HolidayDetailsViewController: UITableViewController {
     }
 
 }
+

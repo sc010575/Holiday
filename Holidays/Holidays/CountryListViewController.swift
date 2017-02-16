@@ -8,13 +8,26 @@
 
 import UIKit
 
-class CountryListViewController: UITableViewController{
+class CountryListViewController: UITableViewController {
     
-    private let countries :[Locale.CountryInfo] = Locale.countryList()
-    
+    fileprivate let countries :[Locale.CountryInfo] = Locale.countryList()
+    var searchedCountries :[Locale.CountryInfo] = []
+
+    let searchController = UISearchController(searchResultsController: nil)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Holidays"
+        
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        // Setup the Scope Bar
+        tableView.tableHeaderView = searchController.searchBar
+
         
     }
     
@@ -62,7 +75,28 @@ class CountryListViewController: UITableViewController{
         
     }
     
+    func filterContentForSearchText(_ searchText: String) {
+        searchedCountries = countries.filter({( country : Locale.CountryInfo) -> Bool in
+            return  country.country.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    }
+
     
-    
+}
+
+// MARK : SearchBar
+extension CountryListViewController: UISearchBarDelegate {
+    // MARK: - UISearchBar Delegate
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+             filterContentForSearchText(searchBar.text!)
+    }
+}
+
+extension CountryListViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
 }
 
