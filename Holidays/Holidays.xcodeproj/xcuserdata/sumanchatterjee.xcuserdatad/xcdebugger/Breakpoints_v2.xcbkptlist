@@ -73,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Holidays/CountryListViewController.swift"
+            filePath = "Holidays/HolidayDetailsViewController.swift"
             timestampString = "508936379.934004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "holidayListgUpdated(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Holidays/HolidayDetailsViewController.swift"
-            timestampString = "508936379.934004"
+            filePath = "Holidays/HolidayInfoViewModel.swift"
+            timestampString = "508937987.774028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "holidayListgUpdated(_:)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "holidayBuilder(for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

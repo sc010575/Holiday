@@ -12,9 +12,9 @@ class CountryListViewController: UITableViewController {
     
     fileprivate let countries :[Locale.CountryInfo] = Locale.countryList()
     var searchedCountries :[Locale.CountryInfo] = []
-
+    
     let searchController = UISearchController(searchResultsController: nil)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Holidays"
@@ -27,7 +27,7 @@ class CountryListViewController: UITableViewController {
         
         // Setup the Scope Bar
         tableView.tableHeaderView = searchController.searchBar
-
+        
         
     }
     
@@ -47,7 +47,14 @@ class CountryListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let countryInfo : Locale.CountryInfo = countries[indexPath.row]
+        var countryInfo : Locale.CountryInfo
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            countryInfo = searchedCountries[indexPath.row]
+        } else {
+            
+            countryInfo  = countries[indexPath.row]
+        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CountryListTableViewCell.self), for: indexPath)
         
@@ -77,11 +84,13 @@ class CountryListViewController: UITableViewController {
     
     func filterContentForSearchText(_ searchText: String) {
         searchedCountries = countries.filter({( country : Locale.CountryInfo) -> Bool in
+            print(searchedCountries.count)
+            
             return  country.country.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
     }
-
+    
     
 }
 
@@ -89,7 +98,7 @@ class CountryListViewController: UITableViewController {
 extension CountryListViewController: UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-             filterContentForSearchText(searchBar.text!)
+        filterContentForSearchText(searchBar.text!)
     }
 }
 
