@@ -40,7 +40,7 @@ class DownloadManager: NSObject {
                     
                     if let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
                     {
-                        
+                        print(json)
                         completionhandler(json,true)
                     }
                     
